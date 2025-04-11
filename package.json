@@ -2,15 +2,16 @@
   "name": "exp_criativa_trabalho_01",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "start": "ts-node src/main.ts",
-    "dev": "nodemon src/main.ts"
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "nodemon": "^3.1.9",
