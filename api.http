@@ -1,2 +1,199 @@
+### 📚 BOOKS
+
+# Criar livro
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Dom Casmurro",
+  "isbn": "978-85-359-0277-1",
+  "publicationYear": 1899,
+  "authorId": 1,
+  "categoryId": 1
+}
+
 ###
-GET http://localhost:3000/
+
+# Listar todos os livros
+GET http://localhost:3000/books
+
+###
+
+# Buscar livro por ID
+GET http://localhost:3000/books/1
+
+###
+
+# Atualizar livro
+PUT http://localhost:3000/books/1
+Content-Type: application/json
+
+{
+  "title": "Dom Casmurro (Editado)",
+  "publishedYear": 1900,
+  "authorId": 1,
+  "categoryId": 1
+}
+
+###
+
+# Deletar livro
+DELETE http://localhost:3000/books/1
+
+---
+
+### ✍️ AUTHORS
+
+# Criar autor
+POST http://localhost:3000/authors
+Content-Type: application/json
+
+{
+  "name": "Machado de Assis",
+  "birthYear": 1839
+}
+
+###
+
+# Listar todos autores
+GET http://localhost:3000/authors
+
+###
+
+# Buscar autor por ID
+GET http://localhost:3000/authors/1
+
+###
+
+# Atualizar autor
+PUT http://localhost:3000/authors/1
+Content-Type: application/json
+
+{
+  "name": "Machado de Assis Atualizado",
+  "birthYear": 1839
+}
+
+###
+
+# Deletar autor
+DELETE http://localhost:3000/authors/1
+
+---
+
+### 🏷️ CATEGORIES
+
+# Criar categoria
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Romance"
+}
+
+###
+
+# Listar todas categorias
+GET http://localhost:3000/categories
+
+###
+
+# Buscar categoria por ID
+GET http://localhost:3000/categories/1
+
+###
+
+# Atualizar categoria
+PUT http://localhost:3000/categories/1
+Content-Type: application/json
+
+{
+  "name": "Romance Atualizado"
+}
+
+###
+
+# Deletar categoria
+DELETE http://localhost:3000/categories/1
+
+---
+
+### 👤 MEMBERS
+
+# Criar membro
+POST http://localhost:3000/members
+Content-Type: application/json
+
+{
+  "name": "João da Silva",
+  "email": "joao@email.com",
+  "phone": "41999999999"
+}
+
+###
+
+# Listar todos os membros
+GET http://localhost:3000/members
+
+###
+
+# Buscar membro por ID
+GET http://localhost:3000/members/1
+
+###
+
+# Atualizar membro
+PUT http://localhost:3000/members/1
+Content-Type: application/json
+
+{
+  "name": "João Atualizado",
+  "email": "joao@email.com",
+  "phone": "11999999999"
+}
+
+###
+
+# Deletar membro
+DELETE http://localhost:3000/members/1
+
+---
+
+### 🔄 LOANS
+
+# Criar empréstimo
+POST http://localhost:3000/loans
+Content-Type: application/json
+
+{
+  "bookId": 1,
+  "memberId": 1,
+  "loanDate": "2025-04-11",
+  "returnDate": "2025-04-20"
+}
+
+###
+
+# Listar todos os empréstimos
+GET http://localhost:3000/loans
+
+###
+
+# Buscar empréstimo por ID
+GET http://localhost:3000/loans/1
+
+###
+
+# Atualizar empréstimo (retorno)
+PUT http://localhost:3000/loans/1
+Content-Type: application/json
+
+{
+  "returnDate": "2025-04-19",
+  "returned": true
+}
+
+###
+
+# Deletar empréstimo
+DELETE http://localhost:3000/loans/1
