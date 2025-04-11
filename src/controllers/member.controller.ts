@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../prisma/client';
 
 // Criar membro
-export const createMember = async (req: Request, res: Response) => {
+export const createMember = async (req: Request, res: Response): Promise<any> => {
   const { name, email, phone } = req.body;
 
   try {
@@ -16,7 +16,7 @@ export const createMember = async (req: Request, res: Response) => {
 };
 
 // Listar todos os membros
-export const getAllMembers = async (_: Request, res: Response) => {
+export const getAllMembers = async (_: Request, res: Response): Promise<any> => {
   const members = await prisma.member.findMany({
     include: { loans: true }
   });
@@ -24,7 +24,7 @@ export const getAllMembers = async (_: Request, res: Response) => {
 };
 
 // Buscar membro por ID
-export const getMemberById = async (req: Request, res: Response) => {
+export const getMemberById = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   const member = await prisma.member.findUnique({
@@ -38,7 +38,7 @@ export const getMemberById = async (req: Request, res: Response) => {
 };
 
 // Atualizar membro
-export const updateMember = async (req: Request, res: Response) => {
+export const updateMember = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { name, email, phone } = req.body;
 
@@ -54,7 +54,7 @@ export const updateMember = async (req: Request, res: Response) => {
 };
 
 // Deletar membro
-export const deleteMember = async (req: Request, res: Response) => {
+export const deleteMember = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   try {

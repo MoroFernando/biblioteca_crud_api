@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { prisma } from '../prisma/client';
+import { Book } from '@prisma/client';
 
 // Criar livro
-export const createBook = async (req: Request, res: Response) => {
+export const createBook = async (req: Request, res: Response): Promise<any> => {
   const { title, isbn, publicationYear, authorId, categoryId } = req.body;
 
   try {
@@ -16,7 +17,7 @@ export const createBook = async (req: Request, res: Response) => {
 };
 
 // Listar todos os livros
-export const getAllBooks = async (_: Request, res: Response) => {
+export const getAllBooks = async (_: Request, res: Response): Promise<any> => {
   const books = await prisma.book.findMany({
     include: { author: true, category: true }
   });
@@ -24,7 +25,7 @@ export const getAllBooks = async (_: Request, res: Response) => {
 };
 
 // Buscar por ID
-export const getBookById = async (req: Request, res: Response) => {
+export const getBookById = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   const book = await prisma.book.findUnique({
@@ -38,7 +39,7 @@ export const getBookById = async (req: Request, res: Response) => {
 };
 
 // Atualizar livro
-export const updateBook = async (req: Request, res: Response) => {
+export const updateBook = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { title, isbn, publicationYear, authorId, categoryId } = req.body;
 
@@ -54,7 +55,7 @@ export const updateBook = async (req: Request, res: Response) => {
 };
 
 // Deletar livro
-export const deleteBook = async (req: Request, res: Response) => {
+export const deleteBook = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   try {

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../prisma/client';
 
 // Criar empréstimo
-export const createLoan = async (req: Request, res: Response) => {
+export const createLoan = async (req: Request, res: Response): Promise<any> => {
   const { bookId, memberId, loanDate, returnDate } = req.body;
 
   try {
@@ -21,7 +21,7 @@ export const createLoan = async (req: Request, res: Response) => {
 };
 
 // Listar todos os empréstimos
-export const getAllLoans = async (_: Request, res: Response) => {
+export const getAllLoans = async (_: Request, res: Response): Promise<any> => {
   const loans = await prisma.loan.findMany({
     include: {
       book: true,
@@ -32,7 +32,7 @@ export const getAllLoans = async (_: Request, res: Response) => {
 };
 
 // Buscar empréstimo por ID
-export const getLoanById = async (req: Request, res: Response) => {
+export const getLoanById = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   const loan = await prisma.loan.findUnique({
@@ -49,7 +49,7 @@ export const getLoanById = async (req: Request, res: Response) => {
 };
 
 // Atualizar empréstimo (ex: marcar como devolvido)
-export const updateLoan = async (req: Request, res: Response) => {
+export const updateLoan = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { returnDate, returned } = req.body;
 
@@ -68,7 +68,7 @@ export const updateLoan = async (req: Request, res: Response) => {
 };
 
 // Deletar empréstimo
-export const deleteLoan = async (req: Request, res: Response) => {
+export const deleteLoan = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   try {

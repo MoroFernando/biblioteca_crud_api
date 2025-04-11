@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../prisma/client';
 
 // Criar autor
-export const createAuthor = async (req: Request, res: Response) => {
+export const createAuthor = async (req: Request, res: Response): Promise<any> => {
   const { name, birthYear } = req.body;
 
   try {
@@ -16,7 +16,7 @@ export const createAuthor = async (req: Request, res: Response) => {
 };
 
 // Listar todos os autores
-export const getAllAuthors = async (_: Request, res: Response) => {
+export const getAllAuthors = async (_: Request, res: Response): Promise<any> => {
   const authors = await prisma.author.findMany({
     include: { books: true }
   });
@@ -24,7 +24,7 @@ export const getAllAuthors = async (_: Request, res: Response) => {
 };
 
 // Buscar autor por ID
-export const getAuthorById = async (req: Request, res: Response) => {
+export const getAuthorById = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   const author = await prisma.author.findUnique({
@@ -38,7 +38,7 @@ export const getAuthorById = async (req: Request, res: Response) => {
 };
 
 // Atualizar autor
-export const updateAuthor = async (req: Request, res: Response) => {
+export const updateAuthor = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { name, birthYear } = req.body;
 
@@ -54,7 +54,7 @@ export const updateAuthor = async (req: Request, res: Response) => {
 };
 
 // Deletar autor
-export const deleteAuthor = async (req: Request, res: Response) => {
+export const deleteAuthor = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   try {

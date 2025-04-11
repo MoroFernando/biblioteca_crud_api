@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { prisma } from '../prisma/client';
 
 // Criar categoria
-export const createCategory = async (req: Request, res: Response) => {
+export const createCategory = async (req: Request, res: Response): Promise<any> => {
   const { name } = req.body;
 
   try {
@@ -16,7 +16,7 @@ export const createCategory = async (req: Request, res: Response) => {
 };
 
 // Listar todas categorias
-export const getAllCategories = async (_: Request, res: Response) => {
+export const getAllCategories = async (_: Request, res: Response): Promise<any> => {
   const categories = await prisma.category.findMany({
     include: { books: true }
   });
@@ -24,7 +24,7 @@ export const getAllCategories = async (_: Request, res: Response) => {
 };
 
 // Buscar categoria por ID
-export const getCategoryById = async (req: Request, res: Response) => {
+export const getCategoryById = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   const category = await prisma.category.findUnique({
@@ -38,7 +38,7 @@ export const getCategoryById = async (req: Request, res: Response) => {
 };
 
 // Atualizar categoria
-export const updateCategory = async (req: Request, res: Response) => {
+export const updateCategory = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -54,7 +54,7 @@ export const updateCategory = async (req: Request, res: Response) => {
 };
 
 // Deletar categoria
-export const deleteCategory = async (req: Request, res: Response) => {
+export const deleteCategory = async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
 
   try {
