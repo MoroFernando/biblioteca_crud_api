@@ -28,7 +28,7 @@ Uma API RESTful feita em **Node.js + TypeScript** com **Prisma ORM** e **MySQL**
 
 ```bash
 git clone https://github.com/seu-usuario/biblioteca-crud.git
-cd biblioteca-crud
+cd biblioteca-crud/back
 ```
 
 2. **Instale as dependências**
