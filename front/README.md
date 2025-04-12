@@ -29,7 +29,7 @@ Uma aplicação frontend em React + TypeScript que consome a API REST da bibliot
 1. **Clone o repositório**
 
 ```bash
-git clone https://github.com/seu-usuario/biblioteca-crud.git
+git clone https://github.com/MoroFernando/biblioteca_crud_api.git
 cd biblioteca-crud/front
 ```
 
