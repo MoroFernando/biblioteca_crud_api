@@ -8,8 +8,8 @@ export const createLoan = async (req: Request, res: Response): Promise<any> => {
   try {
     const loan = await prisma.loan.create({
       data: {
-        bookId,
-        memberId,
+        bookId: Number(bookId),
+        memberId: Number(memberId),
         loanDate: loanDate ? new Date(loanDate) : undefined,
         returnDate: returnDate ? new Date(returnDate) : undefined
       }

@@ -8,10 +8,17 @@ export const createBook = async (req: Request, res: Response): Promise<any> => {
 
   try {
     const book = await prisma.book.create({
-      data: { title, isbn, publicationYear, authorId, categoryId }
+      data: { 
+      title, 
+      isbn, 
+      publicationYear, 
+      authorId: Number(authorId), 
+      categoryId: Number(categoryId) 
+      }
     });
     res.status(201).json(book);
   } catch (error) {
+    console.error('Erro ao criar livro:', error);
     res.status(500).json({ error: 'Erro ao criar o livro' });
   }
 };
