@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, ArrowLeft } from "lucide-react";
 import { DataTable } from "@/components/data-table";
 import { loanColumns } from "./columns";
 import api from "@/lib/api";
 import LoanDialog from "./LoanDialog";
+import { useNavigate } from "react-router-dom";
 
 export type Loan = {
   id: number;
@@ -20,6 +21,7 @@ export default function Loans() {
   const [loans, setLoans] = useState<Loan[]>([]);
   const [open, setOpen] = useState(false);
   const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
+  const navigate = useNavigate();
 
   const fetchLoans = async () => {
     const { data: loansData } = await api.get("/loans");
@@ -54,8 +56,20 @@ export default function Loans() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold">Empréstimos</h1>
-        <Button className="cursor-pointer" onClick={() => { setSelectedLoan(null); setOpen(true); }}>
+        <div className="flex items-center space-x-2">
+          <ArrowLeft
+            className="cursor-pointer"
+            onClick={() => navigate("/")}
+          />
+          <h1 className="text-2xl font-semibold">Empréstimos</h1>
+        </div>
+        <Button
+          className="cursor-pointer"
+          onClick={() => {
+            setSelectedLoan(null);
+            setOpen(true);
+          }}
+        >
           <Plus className="mr-2 h-4 w-4" /> Novo Empréstimo
         </Button>
       </div>

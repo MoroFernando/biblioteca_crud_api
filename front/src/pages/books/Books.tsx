@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, ArrowLeft } from "lucide-react";
 import { DataTable } from "@/components/data-table";
 import { bookColumns } from "./columns";
 import api from "@/lib/api";
 import BookDialog from "./BookDialog";
+import { useNavigate } from "react-router-dom";
 
 export type Book = {
   id: number;
@@ -13,21 +14,21 @@ export type Book = {
   publicationYear: number;
   categoryId: string;
   authorId: string;
-  category?: { id: string; name: string }; // Adicionado para armazenar os dados da categoria
-  author?: { id: string; name: string };   // Adicionado para armazenar os dados do autor
+  category?: { id: string; name: string };
+  author?: { id: string; name: string };
 };
 
 export default function Books() {
   const [books, setBooks] = useState<Book[]>([]);
   const [open, setOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const navigate = useNavigate();
 
   const fetchBooks = async () => {
     const { data: booksData } = await api.get("/books");
-    const { data: authors } = await api.get("/authors"); // Busca todos os autores
-    const { data: categories } = await api.get("/categories"); // Busca todas as categorias
+    const { data: authors } = await api.get("/authors");
+    const { data: categories } = await api.get("/categories");
 
-    // Enriquecer os livros com os dados de autor e categoria
     const enrichedBooks = booksData.map((book: Book) => ({
       ...book,
       author: authors.find((author: { id: string }) => author.id === book.authorId),
@@ -49,22 +50,42 @@ export default function Books() {
   };
 
   const handleEdit = (book: Book) => {
-    setSelectedBook(book); // Define o livro selecionado
-    setOpen(true); // Abre o diálogo
+    setSelectedBook(book);
+    setOpen(true);
   };
 
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold">Livros</h1>
-        <Button className="cursor-pointer" onClick={() => { setSelectedBook(null); setOpen(true); }}>
+        <div className="flex items-center space-x-2">
+          <ArrowLeft
+            className="cursor-pointer"
+            onClick={() => navigate("/")}
+          />
+          <h1 className="text-2xl font-semibold">Livros</h1>
+        </div>
+        <Button
+          className="cursor-pointer"
+          onClick={() => {
+            setSelectedBook(null);
+            setOpen(true);
+          }}
+        >
           <Plus className="mr-2 h-4 w-4" /> Novo Livro
         </Button>
       </div>
 
-      <DataTable columns={bookColumns(handleEdit, handleDelete)} data={books} />
+      <DataTable
+        columns={bookColumns(handleEdit, handleDelete)}
+        data={books}
+      />
 
-      <BookDialog open={open} setOpen={setOpen} book={selectedBook} refresh={fetchBooks} />
+      <BookDialog
+        open={open}
+        setOpen={setOpen}
+        book={selectedBook}
+        refresh={fetchBooks}
+      />
     </div>
   );
 }
