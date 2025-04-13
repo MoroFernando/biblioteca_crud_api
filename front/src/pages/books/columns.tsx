@@ -22,19 +22,22 @@ export const bookColumns = (
   {
     accessorKey: "category",
     header: "Categoria",
+    cell: ({ row }) => row.original.category?.name || "N/A",
   },
   {
     accessorKey: "author",
     header: "Autor",
+    cell: ({ row }) => row.original.author?.name || "N/A",
   },
   {
     id: "actions",
-    header: "Ações",
+    header: () => <div className="text-right min-w-[100px]">Ações</div>, // Define largura mínima no cabeçalho
     cell: ({ row }) => (
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-end min-w-[100px]"> {/* Define largura mínima nas células */}
         <Button
           variant="outline"
           size="sm"
+          className="cursor-pointer" // Adiciona cursor-pointer
           onClick={() => onEdit(row.original)}
         >
           <Pencil size={16} />
@@ -42,6 +45,7 @@ export const bookColumns = (
         <Button
           variant="destructive"
           size="sm"
+          className="cursor-pointer" // Adiciona cursor-pointer
           onClick={() => onDelete(row.original.id)}
         >
           <Trash2 size={16} />

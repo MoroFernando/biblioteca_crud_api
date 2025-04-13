@@ -12,11 +12,11 @@ type Props = {
 
 export default function BookForm({ book, onSaved }: Props) {
   const [form, setForm] = useState({
-    title: "",
-    isbn: "",
-    publicationYear: "",
-    categoryId: "",
-    authorId: ""
+    title: book ? book.title : "",
+    isbn: book ? book.isbn : "",
+    publicationYear: book ? book.publicationYear : "",
+    categoryId: book ? book.categoryId : "",
+    authorId: book ? book.authorId : ""
   });
 
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
@@ -35,20 +35,6 @@ export default function BookForm({ book, onSaved }: Props) {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    if (book) {
-      setForm({
-        title: book.title,
-        isbn: book.isbn,
-        publicationYear: String(book.publicationYear),
-        categoryId: String(book.categoryId),
-        authorId: String(book.authorId)
-      });
-    } else {
-      setForm({ title: "", isbn: "", publicationYear: "", categoryId: "", authorId: "" });
-    }
-  }, [book]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,8 +78,10 @@ export default function BookForm({ book, onSaved }: Props) {
         value={form.categoryId}
         onValueChange={(value) => setForm({ ...form, categoryId: value })}
       >
-        <SelectTrigger>
-          <SelectValue placeholder="Selecione uma categoria" />
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Selecione uma categoria">
+            {categories.find((category) => category.id == form.categoryId)?.name || "Selecione uma categoria"}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
@@ -107,8 +95,10 @@ export default function BookForm({ book, onSaved }: Props) {
         value={form.authorId}
         onValueChange={(value) => setForm({ ...form, authorId: value })}
       >
-        <SelectTrigger>
-          <SelectValue placeholder="Selecione um autor" />
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Selecione um autor">
+            {authors.find((author) => author.id == form.authorId)?.name || "Selecione um autor"}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           {authors.map((author) => (

@@ -30,6 +30,7 @@ Content-Type: application/json
 
 {
   "title": "Dom Casmurro (Editado)",
+  "isbn": "978-85-359-0277-1",
   "publicationYear": 1900,
   "authorId": 1,
   "categoryId": 1
