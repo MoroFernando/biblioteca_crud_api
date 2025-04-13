@@ -30,7 +30,7 @@ Content-Type: application/json
 
 {
   "title": "Dom Casmurro (Editado)",
-  "publishedYear": 1900,
+  "publicationYear": 1900,
   "authorId": 1,
   "categoryId": 1
 }

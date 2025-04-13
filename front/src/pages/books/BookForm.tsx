@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Book } from "./Books";
+import api from "@/lib/api";
 
 type Props = {
   book: Book | null;
@@ -12,18 +14,39 @@ export default function BookForm({ book, onSaved }: Props) {
   const [form, setForm] = useState({
     title: "",
     isbn: "",
-    publishedYear: ""
+    publicationYear: "",
+    categoryId: "",
+    authorId: ""
   });
+
+  const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
+  const [authors, setAuthors] = useState<{ id: string; name: string }[]>([]);
+
+  useEffect(() => {
+    // Fetch categories and authors from the API
+    const fetchData = async () => {
+      const [categoriesResponse, authorsResponse] = await Promise.all([
+        api.get("/categories"),
+        api.get("/authors")
+      ]);
+      setCategories(categoriesResponse.data);
+      setAuthors(authorsResponse.data);
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (book) {
       setForm({
         title: book.title,
         isbn: book.isbn,
-        publishedYear: String(book.publishedYear)
+        publicationYear: String(book.publicationYear),
+        categoryId: String(book.categoryId),
+        authorId: String(book.authorId)
       });
     } else {
-      setForm({ title: "", isbn: "", publishedYear: "" });
+      setForm({ title: "", isbn: "", publicationYear: "", categoryId: "", authorId: "" });
     }
   }, [book]);
 
@@ -40,7 +63,7 @@ export default function BookForm({ book, onSaved }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...form,
-        publishedYear: Number(form.publishedYear)
+        publicationYear: Number(form.publicationYear)
       })
     });
 
@@ -62,9 +85,39 @@ export default function BookForm({ book, onSaved }: Props) {
       <Input
         placeholder="Ano de publicação"
         type="number"
-        value={form.publishedYear}
-        onChange={(e) => setForm({ ...form, publishedYear: e.target.value })}
+        value={form.publicationYear}
+        onChange={(e) => setForm({ ...form, publicationYear: e.target.value })}
       />
+      <Select
+        value={form.categoryId}
+        onValueChange={(value) => setForm({ ...form, categoryId: value })}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Selecione uma categoria" />
+        </SelectTrigger>
+        <SelectContent>
+          {categories.map((category) => (
+            <SelectItem key={category.id} value={category.id}>
+              {category.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Select
+        value={form.authorId}
+        onValueChange={(value) => setForm({ ...form, authorId: value })}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Selecione um autor" />
+        </SelectTrigger>
+        <SelectContent>
+          {authors.map((author) => (
+            <SelectItem key={author.id} value={author.id}>
+              {author.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
       <Button type="submit" className="w-full">
         {book ? "Salvar alterações" : "Criar livro"}
       </Button>

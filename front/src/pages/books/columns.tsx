@@ -20,6 +20,14 @@ export const bookColumns = (
     header: "Ano de Publicação",
   },
   {
+    accessorKey: "category",
+    header: "Categoria",
+  },
+  {
+    accessorKey: "author",
+    header: "Autor",
+  },
+  {
     id: "actions",
     header: "Ações",
     cell: ({ row }) => (

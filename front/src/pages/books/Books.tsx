@@ -10,7 +10,9 @@ export type Book = {
   id: number;
   title: string;
   isbn: string;
-  publishedYear: number;
+  publicationYear: number;
+  categoryId: string;
+  authorId: string;
 };
 
 export default function Books() {
