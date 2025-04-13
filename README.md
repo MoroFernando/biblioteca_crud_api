@@ -25,8 +25,8 @@ O objetivo deste projeto foi o de explorar e aplicar os padrões comuns de aplic
 
 ## 🗄️ Banco de Dados
 
-Este projeto utiliza um banco de dados **MySQL** para armazenar as informações da biblioteca.
+Este projeto utiliza um banco de dados **MySQL** para armazenar as informações da biblioteca. Portanto, é necessário possuir o serviço do MySQL ativo na sua máquina.
 
-- Um arquivo SQL com o script de criação do banco de dados está disponível no diretório `back/` para importação manual.
+- É possível criar o banco de dados de forma automática utilizando o **Prisma ORM**. As instruções detalhadas estão disponíveis no [README do backend](back/README.md).
 
-- Alternativamente, é possível criar o banco de dados de forma automática seguindo as instruções fornecidas no [README do backend](back/README.md).
+- Caso prefira, também está disponibilizado um arquivo SQL chamado `xp_trabalho_01.sql` para a criação manual do banco de dados.
