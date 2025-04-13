@@ -53,7 +53,13 @@ export const updateBook = async (req: Request, res: Response): Promise<any> => {
   try {
     const book = await prisma.book.update({
       where: { id: Number(id) },
-      data: { title, isbn, publicationYear, authorId, categoryId }
+      data: { 
+        title, 
+        isbn, 
+        publicationYear,
+        authorId: Number(authorId),
+        categoryId: Number(categoryId) 
+      }
     });
     res.json(book);
   } catch (error) {
