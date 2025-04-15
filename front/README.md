@@ -36,7 +36,7 @@ cd biblioteca-crud/front
 2. **Instale as dependências**
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
 3. **Rode o cliente**
