@@ -1,4 +1,4 @@
-# 📚 Exp Criativa - Biblioteca CRUD API
+# 📚 Biblioteca CRUD API
 
 Uma API RESTful feita em **Node.js + TypeScript** com **Prisma ORM** e **MySQL** para gerenciar livros, autores, categorias, membros e empréstimos.
 
