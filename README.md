@@ -1,4 +1,4 @@
-# 📚 Exp Criativa - Biblioteca CRUD
+# 📚 Biblioteca CRUD
 
 Este é um projeto de uma aplicação **fullstack** simples para gerenciar recursos de uma biblioteca, composto por:
 
