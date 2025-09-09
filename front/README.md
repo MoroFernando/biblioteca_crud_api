@@ -1,4 +1,4 @@
-# 📚 Exp Criativa - Biblioteca CRUD Frontend
+# 📚 Biblioteca CRUD Frontend
 
 Uma aplicação frontend em React + TypeScript que consome a API REST da biblioteca, com interface usando shadcn/ui, React Router e TanStack Query.
 
