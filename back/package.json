@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "test:start-db": "docker-compose -f docker-compose.test.yml up -d",
+    "test:wait-db": "wait-on tcp:localhost:3307",
+    "test:migrate": "dotenv -e .env.test -- npx prisma migrate deploy && npx prisma generate",
+    "test:run": "dotenv -e .env.test -- jest",
+    "test:stop-db": "docker-compose -f docker-compose.test.yml down",
+    "test": "npm run test:start-db && npm run test:wait-db && npm run test:migrate && npm run test:run && npm run test:stop-db"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +19,18 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.14.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.18.1",
+    "@types/supertest": "^6.0.3",
+    "dotenv-cli": "^10.0.0",
+    "jest": "^30.1.3",
     "nodemon": "^3.1.9",
     "prisma": "^6.6.0",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "wait-on": "^8.0.4"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
