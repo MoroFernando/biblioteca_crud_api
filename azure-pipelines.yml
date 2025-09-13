@@ -1,0 +1,21 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      cd biblioteca_crud_api/back
+      npm install
+    displayName: 'Install backend dependencies'
+
+  - script: |
+      cd biblioteca_crud_api/back
+      npm test
+    displayName: 'Run backend tests'
